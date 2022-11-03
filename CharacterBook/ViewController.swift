@@ -33,6 +33,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         mySimpsons.append(bart)
         mySimpsons.append(lisa)
         mySimpsons.append(maggie)
+        
+    
          
     }
     
@@ -45,6 +47,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.textLabel?.text = mySimpsons[indexPath.row].name
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        chosenSimpson = mySimpsons[indexPath.row]
+        self.performSegue(withIdentifier: "toDetailVC", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "toDetailVC" {
+                let destinationVC = segue.destination as! DetailViewController
+                destinationVC.selectedSimpson = chosenSimpson
+            }
+        }
 
 
 }
